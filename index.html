@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,9 +19,11 @@
           <h1>Repositorios destacados</h1>
           <p class="intro">Una selección de proyectos que merece la pena tener a mano.</p>
         </div>
-        <p id="repo-count" class="repo-count" aria-live="polite">Cargando…</p>
+        <p id="repo-count" class="repo-count">Cargando…</p>
       </div>
-      <p id="load-message" class="load-message" role="status">Cargando repositorios…</p>
+      <p id="load-message" class="load-message" role="status" aria-live="polite">
+        Cargando repositorios…
+      </p>
       <ul id="repository-list" class="repository-list" aria-label="Repositorios con estrella"></ul>
     </main>
     <footer class="site-footer">Un registro de lo que inspira y construye la comunidad.</footer>

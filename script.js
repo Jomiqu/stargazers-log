@@ -10,6 +10,51 @@ const dateFormat = new Intl.DateTimeFormat("es", {
   timeZone: "UTC"
 });
 
+function isSafeHttpUrl(value) {
+  if (typeof value !== "string") {
+    return false;
+  }
+
+  try {
+    const url = new URL(value);
+    return ["http:", "https:"].includes(url.protocol);
+  } catch {
+    return false;
+  }
+}
+
+function getFormattedDate(dateValue) {
+  if (!dateValue) {
+    return "Fecha no disponible";
+  }
+
+  const parsedDate = new Date(dateValue);
+  if (Number.isNaN(parsedDate.getTime())) {
+    return "Fecha no disponible";
+  }
+
+  return `Marcado ${dateFormat.format(parsedDate)}`;
+}
+
+function isValidRepositoryEvent(event) {
+  if (!event || event.type !== "starred" || !event.repo) {
+    return false;
+  }
+
+  const { repo } = event;
+  const stars = Number(repo.stars);
+
+  return (
+    typeof repo.full_name === "string" &&
+    repo.full_name.trim() !== "" &&
+    typeof repo.description === "string" &&
+    typeof repo.language === "string" &&
+    typeof repo.url === "string" &&
+    isSafeHttpUrl(repo.url) &&
+    Number.isFinite(stars)
+  );
+}
+
 function createRepositoryItem(event, index) {
   const { repo } = event;
   const item = document.createElement("li");
@@ -35,16 +80,24 @@ function createRepositoryItem(event, index) {
 
   const stars = document.createElement("span");
   stars.className = "star-count";
-  stars.textContent = `★ ${numberFormat.format(repo.stars)}`;
+  stars.textContent = `★ ${numberFormat.format(Number(repo.stars))}`;
 
   const date = document.createElement("time");
   date.className = "repository-date";
   date.dateTime = event.starred_at;
-  date.textContent = `Marcado ${dateFormat.format(new Date(event.starred_at))}`;
+  date.textContent = getFormattedDate(event.starred_at);
 
   metadata.append(language, stars);
   item.append(link, description, metadata, date);
   return item;
+}
+
+function getStarredRepositories(events) {
+  if (!Array.isArray(events)) {
+    throw new Error("events.json debe contener un array");
+  }
+
+  return events.filter(isValidRepositoryEvent);
 }
 
 async function loadRepositories() {
@@ -55,12 +108,14 @@ async function loadRepositories() {
     }
 
     const events = await response.json();
-    const starredRepositories = events.filter((event) => event.type === "starred");
+    const starredRepositories = getStarredRepositories(events);
 
     repositoryList.replaceChildren(
       ...starredRepositories.map(createRepositoryItem)
     );
-    repoCount.textContent = `${starredRepositories.length} repositorios`;
+
+    const countLabel = starredRepositories.length === 1 ? "1 repositorio" : `${starredRepositories.length} repositorios`;
+    repoCount.textContent = countLabel;
     loadMessage.textContent = starredRepositories.length
       ? ""
       : "Todavía no hay repositorios en este registro.";

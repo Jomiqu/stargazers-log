@@ -2,10 +2,28 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Stargazers log</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
   </head>
   <body>
-    <h1>Stargazers log</h1>
-    <p>A log of the repositories I've starred.</p>
+    <header class="site-header">
+      <a class="wordmark" href="./">Stargazers log</a>
+      <span class="header-note">Colección personal</span>
+    </header>
+    <main class="page-content">
+      <div class="page-heading">
+        <div>
+          <p class="eyebrow">REGISTRO DE ESTRELLAS</p>
+          <h1>Repositorios destacados</h1>
+          <p class="intro">Una selección de proyectos que merece la pena tener a mano.</p>
+        </div>
+        <p id="repo-count" class="repo-count" aria-live="polite">Cargando…</p>
+      </div>
+      <p id="load-message" class="load-message" role="status">Cargando repositorios…</p>
+      <ul id="repository-list" class="repository-list" aria-label="Repositorios con estrella"></ul>
+    </main>
+    <footer class="site-footer">Un registro de lo que inspira y construye la comunidad.</footer>
   </body>
 </html>

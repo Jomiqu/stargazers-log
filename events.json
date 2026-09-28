@@ -1,0 +1,50 @@
+[
+  {
+    "type": "starred",
+    "starred_at": "2025-02-14T10:30:00Z",
+    "repo": {
+      "name": "vite",
+      "full_name": "vitejs/vite",
+      "url": "https://github.com/vitejs/vite",
+      "description": "Herramientas de frontend de nueva generación.",
+      "language": "TypeScript",
+      "stars": 74000
+    }
+  },
+  {
+    "type": "starred",
+    "starred_at": "2025-01-28T16:45:00Z",
+    "repo": {
+      "name": "htmx",
+      "full_name": "bigskysoftware/htmx",
+      "url": "https://github.com/bigskysoftware/htmx",
+      "description": "Acceso a AJAX, transiciones CSS, WebSockets y eventos enviados por el servidor directamente desde HTML.",
+      "language": "JavaScript",
+      "stars": 38000
+    }
+  },
+  {
+    "type": "starred",
+    "starred_at": "2024-12-09T09:15:00Z",
+    "repo": {
+      "name": "ruff",
+      "full_name": "astral-sh/ruff",
+      "url": "https://github.com/astral-sh/ruff",
+      "description": "Un linter y formateador de Python extremadamente rápido.",
+      "language": "Rust",
+      "stars": 37000
+    }
+  },
+  {
+    "type": "starred",
+    "starred_at": "2024-11-03T13:20:00Z",
+    "repo": {
+      "name": "svelte",
+      "full_name": "sveltejs/svelte",
+      "url": "https://github.com/sveltejs/svelte",
+      "description": "El framework web que compila los componentes en JavaScript optimizado.",
+      "language": "JavaScript",
+      "stars": 82000
+    }
+  }
+]
